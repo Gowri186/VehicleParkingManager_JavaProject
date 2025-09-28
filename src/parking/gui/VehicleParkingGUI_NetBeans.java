@@ -4,6 +4,8 @@ package parking.gui;
  /** Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import parking.backend.ParkingDAO;
+
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalTime;
 import java.util.Queue;
@@ -32,6 +34,10 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
         // Link models to jTable1 and jTable2
         modelCurrent = (DefaultTableModel) jTable1.getModel();
         modelHistory = (DefaultTableModel) jTable2.getModel();
+        jButton5 = new javax.swing.JButton();
+        jButton5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        jButton5.setText("REFRESH");
+        jButton5.addActionListener(this::jButton5ActionPerformed);
         // initialize free slots 1..50
        for (int i = 1; i <= MAX_SLOTS; i++) {
                   freeSlots.add(i);
@@ -234,15 +240,6 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(298, 298, 298)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(410, 410, 410)
-                                .addComponent(jButton5)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -252,7 +249,7 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,37 +259,42 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(335, 335, 335)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(224, 224, 224)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
-                                .addComponent(jTextField5)))
-                        .addGap(277, 277, 277))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(200, 200, 200)
-                        .addComponent(jButton2)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton3)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(106, 106, 106))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(31, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(298, 298, 298)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(270, 270, 270)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jButton1)
+                .addGap(67, 67, 67)
+                .addComponent(jButton2)
+                .addGap(49, 49, 49)
+                .addComponent(jButton3)
+                .addGap(60, 60, 60)
+                .addComponent(jButton5)
+                .addGap(53, 53, 53)
+                .addComponent(jButton4)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,43 +318,55 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(35, 35, 35)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton5)
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        //Refresh for updating current and history table
-        for (int i = 0; i < modelHistory.getRowCount(); i++) {
-        modelHistory.setValueAt(i + 1, i, 0); // sequential numbering
-    }
-
-    jTextField5.setText("History Refreshed!");
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      String vehicleNo = jTextField1.getText().trim();
+     // 1. Check if the vehicle is already parked
+      for (int i = 0; i < modelCurrent.getRowCount(); i++) {
+            
+            // --- CHANGE IS HERE ---
+            Object cellValue = modelCurrent.getValueAt(i, 0);
+
+            // ⚠️ FIX: Check if the value is null before calling toString()
+            if (cellValue == null || cellValue.toString().isEmpty()) {
+                continue; // Skip the row if it's empty (null or empty string)
+            }
+            // ----------------------
+            
+            String parkedVehicleNo = cellValue.toString();
+            
+            if (vehicleNo.equalsIgnoreCase(parkedVehicleNo)) {
+                jTextField5.setText("Error: SAME VEHICLE NUMBER ENTERED. Vehicle " + vehicleNo + " is already parked!");
+                return; // Stop the parking process
+            }
+        }
+       
+         
      
     String vehicleType = jComboBox1.getSelectedItem().toString();
 
@@ -390,6 +404,12 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
     modelCurrent.insertRow(0,new Object[]{ vehicleNo, String.valueOf(slotNo), type, entryTime });
 
     jTextField5.setText("Parked at slot " + slotNo + ". Available: " + freeSlots.size());
+    boolean success = ParkingDAO.parkVehicle(vehicleNo, slotNo, type, LocalTime.now());
+    if (success) {
+    jTextField5.setText("Parked and saved to DB.");
+    } else {
+    jTextField5.setText("DB Error: Couldn't park.");
+    }
     // optional: clear vehicle input for next
     jTextField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -435,6 +455,13 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
     }
 
     modelCurrent.removeRow(selectedRow);
+    boolean success = ParkingDAO.exitVehicle(vehicleNo, LocalTime.now(), totalFee);
+    if (success) {
+        jTextField5.setText("Exited and saved to history.");
+    } else {
+         jTextField5.setText("DB Error: Couldn't update history.");
+    }
+
 
     jTextField2.setText(String.valueOf(totalFee));
     jTextField5.setText("Vehicle exited from slot " + slotStr + ". Available: " + freeSlots.size());  
@@ -496,6 +523,33 @@ public class VehicleParkingGUI_NetBeans extends javax.swing.JFrame {
         // TODO add your handling code here:
         //History table 
     }//GEN-LAST:event_jTable2MousePressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        // 1. Call the database DAO to clear all tables
+        boolean success = ParkingDAO.clearAllData(); 
+        
+        if (success) {
+            // 2. Clear the GUI tables
+            modelCurrent.setRowCount(0); // Clear all rows from the Current table
+            modelHistory.setRowCount(0); // Clear all rows from the History table
+
+            // 3. Reset the free slots queue
+            freeSlots.clear();
+            for (int i = 1; i <= MAX_SLOTS; i++) {
+                freeSlots.add(i);
+            }
+            
+            // 4. Update the status field
+            jTextField5.setText("Database (Current & History) and GUI cleared. Available slots: " + freeSlots.size());
+            
+            // 5. Clear input fields
+            jButton3ActionPerformed(null); // Reuse the existing clear action
+            
+        } else {
+            jTextField5.setText("DB Error: Failed to clear database tables.");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
    
 
    

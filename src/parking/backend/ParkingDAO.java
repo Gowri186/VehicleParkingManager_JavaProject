@@ -27,6 +27,12 @@ public class ParkingDAO {
             return false;
         }
     }
+    public static boolean clearAllData() {
+    // Logic to execute DELETE FROM CurrentParkingTable;
+    // Logic to execute DELETE FROM ParkingHistoryTable;
+    // Return true if successful, false otherwise.
+    return true; // Placeholder
+}
 
     // Exit Vehicle → move to history + delete from current
     public static boolean exitVehicle(String vehicleNo, LocalTime exitTime, int fee) {
