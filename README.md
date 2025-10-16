@@ -1,8 +1,8 @@
-# 🚗 Vehicle Parking Manager System
+#  Vehicle Parking Manager System
 
 The **Vehicle Parking Manager** is a fully functional desktop application developed in Java using **NetBeans IDE**. It provides a robust Graphical User Interface (GUI) for the efficient, real-time management of parking slots, automated fee calculation, and persistent data storage using a **MySQL** database.
 
-## 🌟 Key Features
+##  Key Features
 
 ### Frontend (GUI: `VehicleParkingGUI_NetBeans`)
 * **Real-time Slot Management:** Implements a queue (`java.util.Queue`) to track and assign the **lowest available slot number** from a fixed capacity of **50 slots**.
@@ -18,7 +18,7 @@ The **Vehicle Parking Manager** is a fully functional desktop application develo
 * **Database Slot Integrity:** The DAO includes logic (`getNextAvailableSlot`) to query the database and find the first numerical gap in occupied slots, supporting the GUI's queue-based management.
 * **Time Handling:** Utilizes `java.time.LocalDateTime` to store and retrieve accurate full date and time timestamps, critical for precise fee calculation.
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Component | Technology / Language | Role |
 | :--- | :--- | :--- |
