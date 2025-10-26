@@ -23,7 +23,7 @@ The **Vehicle Parking Manager** is a fully functional desktop application develo
 | Component | Technology / Language | Role |
 | :--- | :--- | :--- |
 | **GUI** | Java Swing (NetBeans Generated) | User interface and event handling. |
-| **Backend** | Java, `Queue`, `LocalDateTime` | Core logic for slot assignment and fee calculation. |
+| **Backend** | DATABASE, `Queue`, `LocalDateTime` | Core logic for slot assignment and fee calculation. |
 | **Database Access** | Java JDBC, `parking.backend.ParkingDAO` | Abstraction layer for all SQL execution and data flow. |
 | **Database** | MySQL Server | Persistent data storage. |
 
